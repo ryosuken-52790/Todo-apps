@@ -1,9 +1,15 @@
+<!-- ◎そもそもコレは何をするためのコード？？ -->
+
+
 <?php
 
 // require_once('Models/Todo.php');
 require_once('Models/Todo.php');
+
+
 // 入力されたデータを変数taskに保存
 $task = $_POST['task'];
+
 
 $todo = new Todo();
 // ここでやりたいことはtaskに格納されたデータを受け取ってDBに入れたい。

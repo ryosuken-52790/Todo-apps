@@ -49,6 +49,7 @@
             </div>
         </nav>
     </header>
+       <!-- ヘッダー両サイドに言葉・文字を配列する。 -->
 
     <main class="container py-5">
         <section>
@@ -83,15 +84,16 @@
                 $task):?>
                 <tr>
                     <td>
-                        <?php echo $task['name']; ?>
+                        <?php echo h($task['name']); ?>
                     </td>
                     <td><?php echo h($task['due_date']); ?></td>
                     <td>NOT YET</td>
                     <td>
-                        <a class="text-success" href="edit.php">EDIT</a>
+                        <a class="text-success" href="edit.php?id<?php echo h($task['id']);?>">EDIT</a>
                     </td>
                     <td>
-                        <a class="text-danger" href="delete.php">DELETE</a>
+                        <a class="text-danger" href="delete.php?id=1<?php echo h($task['id']);?>">DELETE</a>
+                        <!-- href="delete.php?id=1を追加したよ？ -->
                     </td>
                 </tr>
                 <?php endforeach; ?>

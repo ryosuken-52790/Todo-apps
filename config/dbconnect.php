@@ -21,6 +21,7 @@ class DbManager
           ];
 
           $dsn = "mysql:host=$host;dbname=$dbname;charset=$charset";
+                    // ここの意味だけでも知りたい・使えるようになる!!
           try {
               $this->dbh = new PDO($dsn, $user, $password, $options);
           } catch (\PDOException $e) {
