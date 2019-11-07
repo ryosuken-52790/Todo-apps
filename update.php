@@ -10,7 +10,7 @@ require_once('Models/Todo.php');
 
 
 $id = $_POST['id'];
-$id = $_POST['task'];
+$task = $_POST['task'];
 
 // 指定してあげて、var_dump!!
       // 値を取って来てあげる。
@@ -27,3 +27,4 @@ $id = $_POST['task'];
 header('Location: index.php');
 // これの意味は??
 // 更新してsそのあとのページが意味をなくしたので、トップページに戻りますよ。
+

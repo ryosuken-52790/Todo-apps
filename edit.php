@@ -1,6 +1,22 @@
+<?php
+// <!-- コレはなんのため？ -->
+// <!-- この下htmlの上に使うための実装コードを書く -->
+    require_once 'function.php';
+    require_once 'Models/Todo.php';
 
-<!-- コレはなんのため？ -->
-<!-- この下htmlの上に使うための実装コードを書く -->
+    $id = $_GET['id'];
+    // var_dump(id);
+    // exit;
+    // <!-- 選択されたtaskのidを取得する。 -->
+    // どこにidがあるのか？
+
+// var_dump($id);
+
+    $todo = new Todo();
+
+    $task = $todo->get($id);
+
+?>
 
 
 <!DOCTYPE html>
@@ -34,8 +50,6 @@
           <section>
               <form class="form-row" action="update.php" method="POST">
                   <div class="col-12 col-md-9 py-2">
-
-
                       <input type="text" name="task" class="form-control" placeholder="ADD TODO" value="<?php echo h($task['name']); ?>">
                       <input type="hidden" value="<?php echo h($task['id']); ?>" name="id">
                   </div>

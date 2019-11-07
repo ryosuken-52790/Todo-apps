@@ -17,7 +17,7 @@
 
 
     // var_dump($tasks);
-
+// ryosuken
 
 ?>
 
@@ -30,7 +30,7 @@
       <meta http-equiv="X-UA-Compatible" content="ie=edge">
       <title>Document</title>
       <link rel="stylesheet" href="assets/css/reset.css">
-      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+      <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
       <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
@@ -53,17 +53,17 @@
 
     <main class="container py-5">
         <section>
-            <form class="form-row justify-content-center" action="create.php" method="POST">
+            <form class="form-row justify-content-center">
                  <!-- ↑ ⇧ ↑ ⇧ ↑ 抜けてる -->
                  <!-- name属性を足す。 -->
                  <!-- 足さないとデータが形として現れない。 -->
                 <div class="col-10 col-md-6 py-2">
-                    <input type="text" class="form-control" placeholder="ADD TODO"
+                    <input id="input-task" type="text" class="form-control" placeholder="ADD TODO"
                     name="task">
                     <!-- 足した。 -->
                 </div>
                 <div class="py-2 col-md-3 col-10">
-                    <button type="submit" class="col-12 btn btn-primary">ADD</button>
+                    <button id="add-button" type="submit" class="col-12 btn btn-primary">ADD</button>
                 </div>
             </form>
         </section>
@@ -77,23 +77,46 @@
                     <th>STATUS</th>
                     <th></th>
                     <th></th>
+                    <th></th>
                 </tr>
               </thead>
               <tbody>
                 <?php foreach ($tasks as
                 $task):?>
-                <tr>
+                <tr id="task-<?php echo h($task['id']); ?>">
                     <td>
                         <?php echo h($task['name']); ?>
                     </td>
-                    <td><?php echo h($task['due_date']); ?></td>
-                    <td>NOT YET</td>
                     <td>
-                        <a class="text-success" href="edit.php?id<?php echo h($task['id']);?>">EDIT</a>
+
+                    <!-- 日付 -->
+                    <?php echo date('Y/m/d',strtotime(h($task['due_date']))); ?>
+                              <!-- echo date('Y/m/d'); -->
+                              <!-- string date ( string $format [, int $timestamp = time() ] ) -->
+                              <!-- red氏に見せてもらった。 -->
+                    </td>
+                        
+
+                    <?php if($task['done_fla'] == 0): ?>
+                        <td>Not yet</td>
+                    <?php else: ?>
+                        <td>Done</td>
+                    <?php endif; ?>
+
+
+                    <td>
+                        <a class="text-success" href="edit.php?id=<?php echo h($task['id']);?>">EDIT</a>
                     </td>
                     <td>
-                        <a class="text-danger" href="delete.php?id=1<?php echo h($task['id']);?>">DELETE</a>
+                        <a data-id="<?php echo h($task['id']); ?>" class="text-danger delete-button" href="delete.php?id=<?php echo h($task['id']); ?>">DELETE</a>
+                        <!-- data-id="sample" -->
+                        <!-- カスタム属性(indexの中にある。) -->
+                        <!-- sampleから、idが表示されるように変えた。 -->
+                                <!-- ↓ -->
                         <!-- href="delete.php?id=1を追加したよ？ -->
+                    </td>
+                    <td>
+                       <button class="btn btn-info done-button">完了</button>
                     </td>
                 </tr>
                 <?php endforeach; ?>
@@ -102,5 +125,7 @@
         </section>
     </main>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="assets/js/app.js"></script>
 </body>
 </html>
